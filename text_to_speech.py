@@ -13,11 +13,11 @@ with open('textFile.txt','r',encoding='utf-8') as text_file:
     if len(os.listdir(path)) == 0:
         text_to_speech.save('./audio/speech.mp3')
     else:
-        # for file in os.listdir(path):
-        print(len(os.listdir(path)))
-            # if os.path.isfile(f'./audio/{file}.mp3'):
-        text_to_speech.save(f'./audio/speech{i}.mp3')
-        i+=1
+        try:
+            text_to_speech.save(f'./audio/speech{i}.mp3')
+            i+=1
+        except Exception as e:
+            print(e)
             
 
 
