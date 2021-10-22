@@ -16,6 +16,7 @@ with open('textFile.txt','r',encoding='utf-8') as text_file:
         else:
             for file in os.listdir(path):
                 print(file)
+                print(os.path.isfile(f'./audio/{file}'))
                 if os.path.isfile(f'./audio/{file}'):
                     text_to_speech.save(f'./audio/speech{i}.mp3')
                     i+=1
