@@ -9,7 +9,7 @@ with open('textFile.txt','r',encoding='utf-8') as text_file:
     # print(type(lines))
     text_to_speech = gTTS(lines,tld='co.in')
     i = 1
-    path = '/audio/'
+    path = './'
     if len(os.listdir(path)) == 0:
         text_to_speech.save('./audio/speech.mp3')
     else:
