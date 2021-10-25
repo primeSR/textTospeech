@@ -1,5 +1,5 @@
 from flask import Flask, render_template
-from flask import request
+from flask import request, send_file
 # from flask.helpers import url_for
 from gtts import gTTS
 import os
@@ -42,14 +42,15 @@ def web_tts():
     # return render_template('index.html', file = "./audio/speech.mp3")
   return render_template('index.html')
 
-# @app.route('/<audio_file_name>')
-# def returnAudioFile(audio_file_name):
-#     path_to_audio_file = "C:/Audios/yourFolderPath" + audio_file_name
-#     return send_file(
-#          path_to_audio_file, 
-#          mimetype="audio/wav", 
-#          as_attachment=True, 
-#          attachment_filename="test.wav")
+@app.route('/<audio_file>')
+def returnAudioFile(audio_file):
+    path_to_audio_file = "./audio/" + audio_file
+    response =  send_file(
+         path_to_audio_file, 
+         mimetype="audio/mp3", 
+         as_attachment=True, 
+          attachment_filename="speech.mp3")
+    return render_template('index.html',file = response)
 
 
 if __name__ == '__main__':
