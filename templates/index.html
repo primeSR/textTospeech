@@ -40,8 +40,14 @@
         <div class="row">
           <div class="col-8">
             <audio controls>
-              <source src="speech.mp3" type="audio/mp3"/>
+              {% if file %}
+              {{file}}
+              <source src="{{file}}" type="audio/mp3"/>
+              {% endif %}
             </audio>
+            {% if file %}
+            {{file}}
+            {% endif %}
           </div>
         </div>
       </div>

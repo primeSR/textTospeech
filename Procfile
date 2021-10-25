@@ -1,2 +1,2 @@
-web: python demo.py
-workers: python demo.py
+web: python webtts.py
+workers: python webtts.py
