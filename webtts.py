@@ -39,7 +39,16 @@ def web_tts():
           i += 1
 
     # return render_template('index.html', file = "./audio/speech.mp3")
-  return render_template('index.html', file = './audio/speech.mp3')
+  return render_template('index.html')
+
+# @app.route('/<audio_file_name>')
+# def returnAudioFile(audio_file_name):
+#     path_to_audio_file = "C:/Audios/yourFolderPath" + audio_file_name
+#     return send_file(
+#          path_to_audio_file, 
+#          mimetype="audio/wav", 
+#          as_attachment=True, 
+#          attachment_filename="test.wav")
 
 
 if __name__ == '__main__':
