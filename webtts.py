@@ -12,7 +12,7 @@ import os
 
 app = Flask(__name__)
 
-port = int(os.environ.get('PORT', 33507))
+port = int(os.getenv("PORT"))
 @app.route('/', methods = ['GET','POST'])
 def web_tts():
   if request.method == "POST":
