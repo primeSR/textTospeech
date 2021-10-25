@@ -1,3 +1,3 @@
-
-web: gunicorn wsgi:app
+web: python webtts.py
+workers: python webtts.py
 
