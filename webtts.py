@@ -1,5 +1,5 @@
 from flask import Flask, render_template
-from flask import request, send_file
+from flask import request
 # from flask.helpers import url_for
 from gtts import gTTS
 import os
@@ -18,7 +18,9 @@ port = int(os.environ.get("PORT",5000))
 def web_tts():
   if request.method == "POST":
     lines = request.form.get('tts-text')
+    # print(lines)
     text_to_speech = gTTS(lines)
+    # print(gTTS(lines))
 
     i = 1
     path = './audio/'
@@ -34,25 +36,30 @@ def web_tts():
                 # print(file)
         if os.path.isfile('./audio/speech.mp3'):
           text_to_speech.save(f'./audio/speech{i}.mp3')
+          text = f"audio file speech{i} generated"
           # response = Response(open(f"./audio/speech{i}.mp3", "rb"), content_type='audio/mp3')
           # dbx.files_upload()
 
           i += 1
 
-    # return render_template('index.html', file = "./audio/speech.mp3")
+
+        
+
+    return render_template('index.html',text = text)
   return render_template('index.html')
 
-@app.route('/<audio_file>')
-def returnAudioFile(audio_file):
-    path_to_audio_file = "./audio/" + audio_file
-    response =  send_file(
-         path_to_audio_file, 
-         mimetype="audio/mp3", 
-         as_attachment=True, 
-          attachment_filename="speech.mp3")
-    return render_template('index.html',file = response)
+# @app.route('/<audio_file>')
+# def returnAudioFile(audio_file):
+#     path_to_audio_file = "./audio/" + audio_file
+#     response =  send_file(
+#          path_to_audio_file, 
+#          mimetype="audio/mp3", 
+#          as_attachment=True, 
+#           attachment_filename="speech.mp3")
+#     return render_template('index.html',file = response)
 
 
 if __name__ == '__main__':
+  # app.run(debug=True)
   app.run(debug=True,host = '0.0.0.0',port = port)
 
