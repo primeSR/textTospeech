@@ -36,13 +36,12 @@ def web_tts():
                 # print(file)
         if os.path.isfile('./audio/speech.mp3'):
           text_to_speech.save(f'./audio/speech{i}.mp3')
-          text = f"audio file speech{i} generated"
+          if os.path.isfile(f'./audio/speech{i}.mp3'):
+            text = f"audio file speech{i} generated"
           # response = Response(open(f"./audio/speech{i}.mp3", "rb"), content_type='audio/mp3')
           # dbx.files_upload()
 
           i += 1
-
-
         
 
     return render_template('index.html',text = text)
