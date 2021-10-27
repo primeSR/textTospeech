@@ -19,9 +19,9 @@ def web_tts():
     # file = './static/tts.mp3'
     text_to_speech = gTTS(lines)
     # text_to_speech.write_to_fp(fp)
-    text_to_speech.save('./tts.mp3')
-    audioplayer.AudioPlayer('./tts.mp3').play(block=True)
-    os.remove('./tts.mp3')
+    text_to_speech.save('tts.mp3')
+    audioplayer.AudioPlayer('tts.mp3').play(block=True)
+    os.remove('tts.mp3')
 
 
   return render_template('index.html')
