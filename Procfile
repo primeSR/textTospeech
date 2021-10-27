@@ -1,3 +1,3 @@
-web: python webtts.py
+web: python webtts.py $PORT
 heroku ps:scale web=1
 
