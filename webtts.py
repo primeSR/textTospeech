@@ -9,11 +9,6 @@ import audioplayer
 app = Flask(__name__)
 
 
-
-
-
-
-# port = int(os.getenv("PORT"))
 port = int(os.environ.get("PORT",5000))
 @app.route('/', methods = ['GET','POST'])
 def web_tts():
@@ -24,13 +19,10 @@ def web_tts():
     # file = './static/tts.mp3'
     text_to_speech = gTTS(lines)
     # text_to_speech.write_to_fp(fp)
-    text_to_speech.save('./static/tts.mp3')
-    audioplayer.AudioPlayer('./static/tts.mp3').play(block=True)
-    os.remove('./static/tts.mp3')
+    text_to_speech.save('./tts.mp3')
+    audioplayer.AudioPlayer('./tts.mp3').play(block=True)
+    os.remove('./tts.mp3')
 
-    
-    
-    # return render_template('index.html')
 
   return render_template('index.html')
 
