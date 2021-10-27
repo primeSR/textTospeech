@@ -3,7 +3,7 @@ from flask import request
 from gtts import gTTS
 import os
 
-from io import BytesIO
+# from io import BytesIO
 import audioplayer
 
 app = Flask(__name__)
@@ -14,9 +14,6 @@ port = int(os.environ.get("PORT",5000))
 def web_tts():
   if request.method == "POST":
     lines = request.form.get('tts-text')
-    fp = BytesIO()
-    # print(lines)
-    # file = './static/tts.mp3'
     text_to_speech = gTTS(lines)
     # text_to_speech.write_to_fp(fp)
     text_to_speech.save('tts.mp3')
