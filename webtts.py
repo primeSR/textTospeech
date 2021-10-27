@@ -23,28 +23,28 @@ def web_tts():
     text_to_speech = gTTS(lines)
     # print(gTTS(lines))
 
-    i = 1
+    # i = 1
     path = './static/'
     # access_token = "c1uzg7s-JewAAAAAAAAAAcXaywdcn4aOKrW93zXVsz2G0xOvr9BSSeinUbqzZofg"
     # dbx = dropbox.Dropbox(access_token)
-    if len(os.listdir(path)) == 0:
-      text_to_speech.save('./static/speech.mp3')
-      file = './static/speech.mp3'
-      text = f"audio file speech.mp3 generated"
+    # if len(os.listdir(path)) == 0:
+    text_to_speech.save('./static/speech.mp3')
+      # file = './static/speech.mp3'
+    text = f"audio file speech.mp3 generated"
       # response = Response(open("./audio/speech.mp3", "rb"), content_type='audio/mp3')
     # tts_file = text_to_speech.write_to_fp(fp) # <-- gtts bytes file object 
     # dbx.files_upload(text_to_speech.save('./speech.mp3'),'/audio')
-    else:
-      for file in os.listdir(path):
-                # print(file)
-        if os.path.isfile('./static/speech.mp3'):
-          text_to_speech.save(f'./static/speech{i}.mp3')
-          file = f'./static/speech{i}.mp3'
-          text = f"audio file speech{i}.mp3 generated"
+    # else:
+    #   for file in os.listdir(path):
+    #             # print(file)
+    #     if os.path.isfile('./static/speech.mp3'):
+    #       text_to_speech.save(f'./static/speech{i}.mp3')
+    #       file = f'./static/speech{i}.mp3'
+    #       text = f"audio file speech{i}.mp3 generated"
 
-          # if os.path.isfile(f'./static/speech{i}.mp3'):
-          #   text = f"audio file speech{i}.mp3 generated"
-          i += 1
+    #       # if os.path.isfile(f'./static/speech{i}.mp3'):
+    #       #   text = f"audio file speech{i}.mp3 generated"
+    #       i += 1
     
     return render_template('index.html',text = text)
 
