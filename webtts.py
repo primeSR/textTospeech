@@ -1,35 +1,54 @@
-from flask import Flask, render_template
-from flask import request
+from flask import Flask, render_template, url_for
+from flask import request, send_file
+
 from gtts import gTTS
 import os
 
-# from io import BytesIO
-import audioplayer
+
+
 
 app = Flask(__name__)
 
-
+# port = int(os.getenv("PORT"))
 port = int(os.environ.get("PORT",5000))
 @app.route('/', methods = ['GET','POST'])
 def web_tts():
   if request.method == "POST":
     lines = request.form.get('tts-text')
+    # print(lines)
     text_to_speech = gTTS(lines)
-    # text_to_speech.write_to_fp(fp)
-    text_to_speech.save('tts.mp3')
-    audioplayer.AudioPlayer('tts.mp3').play(block=True)
-    os.remove('tts.mp3')
+    # print(gTTS(lines))
 
+    i = 1
+    path = './static/'
+    if len(os.listdir(path)) == 0:
+      text_to_speech.save('./static/speech.mp3')
+      file = './static/speech.mp3'
+      text = f"audio file speech.mp3 generated"
+    else:
+      for file in os.listdir(path):
+                # print(file)
+        if os.path.isfile('./static/speech.mp3'):
+          text_to_speech.save(f'./static/speech{i}.mp3')
+          file = f'./static/speech{i}.mp3'
+          text = f"audio file speech{i}.mp3 generated"
+
+          # if os.path.isfile(f'./static/speech{i}.mp3'):
+          #   text = f"audio file speech{i}.mp3 generated"
+          i += 1
+    
+    return render_template('index.html',text = text)
 
   return render_template('index.html')
 
-# @app.route('/')
-# def returnAudioFile():
-#     path_to_audio_file = "./static/"
-#     return send_file(
-#          path_to_audio_file, 
-#          mimetype="audio/mp3", 
-#          as_attachment=True)
+@app.route('/<audio_file_name>')
+def returnAudioFile(audio_file_name):
+    path_to_audio_file = "./static/" + audio_file_name
+    return send_file(
+         path_to_audio_file, 
+         mimetype="audio/mp3", 
+         as_attachment=True, 
+         attachment_filename=audio_file_name)
 
 
 if __name__ == '__main__':

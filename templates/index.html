@@ -18,7 +18,7 @@
       <form method="POST">
         <label>Enter </label>
         <textarea class="form-control" name="tts-text" placeholder="your text here" rows="3"></textarea>
-        <input class="btn btn-primary" type="submit" value="Speak"/>
+        <input class="btn btn-primary" type="submit" value="Get audio"/>
       </form>
     </div>
     <div>
@@ -29,13 +29,31 @@
 
               {{text}}
 
+
+
             {% endif %}
           </div>
 
         </div>
       </div>
       </div>
-          
+  
+      <div class="container text-center">
+        <div class="row">
+          <div class="col-8">
+            <audio controls>
+              <source src="{{ url_for('static', filename='../static/speech.mp3') }}" type="audio/mp3">
+              Your browser does not support the audio tag.
+            </audio>
+            {{file}}
+            <div class="text-center">
+              <a class="btn btn-info" href="" type="button" onclick="window.location.href='{{ url_for('returnAudioFile', audio_file_name = audio_file_name)}}';">Download</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+    
     <div>
       
     </div>
