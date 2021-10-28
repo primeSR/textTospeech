@@ -23,11 +23,13 @@
     </div>
     <div>
       <div class="container text-success">
-        <div class="row">
+        <div class="row text-center">
           <div class="col-8">
             {% if text %}
 
-              {{text}}
+              <div class="row">
+                <h5>{{text}}</h5>
+              </div>
 
             {% endif %}
           </div>
@@ -48,7 +50,7 @@
             </div>
             <div class="text-center" style="padding: 3px;">
               YOUR audio file is here 
-              <a href="#{{file}}" title="audio file path" target="_blank"><strong>{{file}}</strong></a>
+              <a href="#player" title="audio file path" target="_blank"><strong>{{file}}</strong></a>
             </div>
           </div>
         </div>
