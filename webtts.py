@@ -62,7 +62,7 @@ def web_tts():
             i += 1
 
     
-      return Response(file_url)
+      return file_url
 
   return render_template('index.html')
 
