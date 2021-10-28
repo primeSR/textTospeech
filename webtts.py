@@ -34,8 +34,6 @@ def web_tts():
           file = f'./static/speech{i}.mp3'
           text = f"audio file speech{i}.mp3 generated"
 
-          # if os.path.isfile(f'./static/speech{i}.mp3'):
-          #   text = f"audio file speech{i}.mp3 generated"
           i += 1
     
     return render_template('index.html',text = text, file = file)

@@ -35,20 +35,25 @@
         </div>
       </div>
       </div>
-  
+      {% if file %}
       <div class="container text-center">
         <div class="row">
           <div class="col-8">
-            <audio controls>
+            <audio controls id="player">
               <source src="{{ url_for('static', filename='../')}}{{file}}" type="audio/mp3">
               Your browser does not support the audio tag.
             </audio>
             <div class="text-center" style="padding: 3px;">
-              <a class="btn btn-info" href="{{file}}" type="button" onclick= "{{ url_for('returnAudioFile', audio_file_name= '../')}}{{file}}">Download</a>
+              <a class="btn btn-info" href="{{file}}" type="button">Download</a>
+            </div>
+            <div class="text-center" style="padding: 3px;">
+              YOUR audio file is here 
+              <a href="#{{file}}" title="audio file path" target="_blank"><strong>{{file}}</strong></a>
             </div>
           </div>
         </div>
       </div>
+      {% endif %}
     
     <div>
       
