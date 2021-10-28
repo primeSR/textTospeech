@@ -47,16 +47,16 @@ def web_tts():
     else:
       tts = gTTS(lines)
       i = 1
-      path = './static/'
+      path = 'static/'
       if len(os.listdir(path)) == 0:
-        tts.save('./static/speech.mp3')
-        file_url = './static/speech.mp3'
+        tts.save('static/speech.mp3')
+        file_url = 'static/speech.mp3'
         # text = f"audio file speech.mp3 generated"
       else:
         for file in os.listdir(path):
-          if os.path.isfile('./static/speech.mp3'):
-            tts.save(f'./static/speech{i}.mp3')
-            file_url = f'./static/speech{i}.mp3'
+          if os.path.isfile('static/speech.mp3'):
+            tts.save(f'static/speech{i}.mp3')
+            file_url = f'static/speech{i}.mp3'
             # text = f"audio file speech{i}.mp3 generated"
 
             i += 1
