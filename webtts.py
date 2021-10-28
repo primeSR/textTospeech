@@ -1,8 +1,10 @@
-from flask import Flask, render_template, url_for
+from flask import Flask, render_template
 from flask import request, send_file
 
 from gtts import gTTS
 import os
+
+# from werkzeug.wrappers import response
 
 
 
@@ -27,7 +29,6 @@ def web_tts():
       text = f"audio file speech.mp3 generated"
     else:
       for file in os.listdir(path):
-                # print(file)
         if os.path.isfile('./static/speech.mp3'):
           text_to_speech.save(f'./static/speech{i}.mp3')
           file = f'./static/speech{i}.mp3'
@@ -37,18 +38,27 @@ def web_tts():
           #   text = f"audio file speech{i}.mp3 generated"
           i += 1
     
-    return render_template('index.html',text = text)
+    return render_template('index.html',text = text, file = file)
 
   return render_template('index.html')
 
-@app.route('/<audio_file_name>')
+@app.route('/static/<audio_file_name>', methods = ['GET'])
 def returnAudioFile(audio_file_name):
-    path_to_audio_file = "./static/" + audio_file_name
-    return send_file(
-         path_to_audio_file, 
-         mimetype="audio/mp3", 
-         as_attachment=True, 
-         attachment_filename=audio_file_name)
+  path_to_audio_file = "./static/" + audio_file_name
+
+  # @after_this_request
+  # def remove_file(response):
+  #   try:
+  #     os.remove(path_to_audio_file)
+  #     response = "file deleted"
+  #   except Exception as e:
+  #     app.logger.error("Error removing or pausing file deletion", e)
+  #   return response
+
+  return send_file(path_to_audio_file,mimetype="audio/mp3",as_attachment=True,attachment_filename=audio_file_name)
+
+
+  
 
 
 if __name__ == '__main__':
