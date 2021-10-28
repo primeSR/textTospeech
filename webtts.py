@@ -1,4 +1,4 @@
-from flask import Flask, render_template,url_for
+from flask import Flask, render_template
 from flask import request, send_file
 
 from gtts import gTTS
@@ -61,10 +61,12 @@ def web_tts():
 
             i += 1
 
-    
-      return url_for('static', filename = file_url)
+      return request.base_url+file_url
 
   return render_template('index.html')
+
+
+
 
 @app.route('/static/<audio_file_name>', methods = ['GET'])
 def returnAudioFile(audio_file_name):
