@@ -1,4 +1,4 @@
-from flask import Flask, render_template,Response
+from flask import Flask, render_template,url_for
 from flask import request, send_file
 
 from gtts import gTTS
@@ -62,7 +62,7 @@ def web_tts():
             i += 1
 
     
-      return file_url
+      return url_for('static', filename = file_url)
 
   return render_template('index.html')
 
