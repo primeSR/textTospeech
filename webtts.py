@@ -24,16 +24,16 @@ def web_tts():
     # print(gTTS(lines))
 
     i = 1
-    path = './static/'
+    path = 'static/'
     if len(os.listdir(path)) == 0:
-      text_to_speech.save('./static/speech.mp3')
-      file = './static/speech.mp3'
+      text_to_speech.save('static/speech.mp3')
+      file = 'static/speech.mp3'
       text = f"audio file speech.mp3 generated"
     else:
       for file in os.listdir(path):
-        if os.path.isfile('./static/speech.mp3'):
-          text_to_speech.save(f'./static/speech{i}.mp3')
-          file = f'./static/speech{i}.mp3'
+        if os.path.isfile('static/speech.mp3'):
+          text_to_speech.save(f'static/speech{i}.mp3')
+          file = f'static/speech{i}.mp3'
           text = f"audio file speech{i}.mp3 generated"
 
           i += 1
