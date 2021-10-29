@@ -25,7 +25,8 @@ def web_tts():
     audio_file = f'static/{file_name}.mp3'
     text = f"audio file {file_name}.mp3 generated"
 
-    
+
+
     return render_template('index.html',text = text, file = audio_file)
 
   if request.method == "GET":
@@ -45,12 +46,30 @@ def web_tts():
 
   return render_template('index.html')
 
+@app.route('/file_val',methods = ['GET'])
+def remove_file_after_play():
+  file_val = request.get_data()
+  
+  print({"file_value":file_val})
+  try:
+    os.remove(file_val)
+    print("file removed")
+  except Exception as e:
+    print(e)
+
+  return render_template('index.html')
+  
+
 
 
 
 @app.route('/static/<audio_file_name>', methods = ['GET'])
 def returnAudioFile(audio_file_name):
   path_to_audio_file = "./static/" + audio_file_name
+  
+  # acc_time = os.stat(path_to_audio_file).st_atime
+  
+  # print(acc_time)
   return send_file(path_to_audio_file,mimetype="audio/mp3",as_attachment=True,download_name=audio_file_name)
   
 
