@@ -3,40 +3,28 @@ from flask import request, send_file
 
 from gtts import gTTS
 import os
-
-import gtts
-
-# from werkzeug.wrappers import response
+import datetime
 
 
 
 
 app = Flask(__name__)
 
-# port = int(os.getenv("PORT"))
 port = int(os.environ.get("PORT",5000))
 @app.route('/', methods = ['GET','POST'])
 def web_tts():
   if request.method == "POST":
     lines = request.form.get('tts-text')
-    # print(lines)
     text_to_speech = gTTS(lines)
-    # print(gTTS(lines))
 
-    i = 1
-    path = 'static/'
-    if len(os.listdir(path)) == 0:
-      text_to_speech.save('static/speech.mp3')
-      audio_file = 'static/speech.mp3'
-      text = f"audio file speech.mp3 generated"
-    else:
-      for _ in os.listdir(path):
-        if os.path.isfile('static/speech.mp3'):
-          text_to_speech.save(f'static/speech{i}.mp3')
-          audio_file = f'static/speech{i}.mp3'
-          text = f"audio file speech{i}.mp3 generated"
+    base_name = 'aud'
+    suffix = datetime.datetime.now().strftime('%y%m%d_%H%M%S')
+    file_name = "_".join([base_name,suffix])
 
-          i += 1
+    text_to_speech.save(f'static/{file_name}.mp3')
+    audio_file = f'static/{file_name}.mp3'
+    text = f"audio file {file_name}.mp3 generated"
+
     
     return render_template('index.html',text = text, file = audio_file)
 
@@ -46,21 +34,13 @@ def web_tts():
       pass
     else:
       tts = gTTS(lines)
-      i = 1
-      path = 'static/'
-      if len(os.listdir(path)) == 0:
-        tts.save('static/speech.mp3')
-        file_url = 'static/speech.mp3'
-        # text = f"audio file speech.mp3 generated"
-      else:
-        for file in os.listdir(path):
-          if os.path.isfile('static/speech.mp3'):
-            tts.save(f'static/speech{i}.mp3')
-            file_url = f'static/speech{i}.mp3'
-            # text = f"audio file speech{i}.mp3 generated"
+      base_name = 'aud'
+      suffix = datetime.datetime.now().strftime('%y%m%d_%H%M%S')
+      file_name = "_".join([base_name, suffix])
 
-            i += 1
-
+      tts.save(f'static/{file_name}.mp3')
+      file_url = f'static/{file_name}.mp3'
+ 
       return request.base_url+file_url
 
   return render_template('index.html')
