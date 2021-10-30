@@ -1,5 +1,5 @@
-from flask import Flask, render_template
-from flask import request, send_file
+from flask import Flask, render_template, redirect
+from flask import request, send_file, after_this_request
 
 from gtts import gTTS
 import os
@@ -21,7 +21,7 @@ def web_tts():
     suffix = datetime.datetime.now().strftime('%y%m%d_%H%M%S')
     file_name = "_".join([base_name,suffix])
 
-    text_to_speech.save(f'static/{file_name}.mp3')
+    text_to_speech.save(f'static/{file_name}.mp3', tld = 'co.uk')
     audio_file = f'static/{file_name}.mp3'
     text = f"audio file {file_name}.mp3 generated"
 
@@ -40,8 +40,8 @@ def web_tts():
       file_name = "_".join([base_name, suffix])
 
       tts.save(f'static/{file_name}.mp3')
-      file_url = f'static/{file_name}.mp3'
- 
+      file_url = f'static/{file_name}.mp3'     
+      
       return request.base_url+file_url
 
   return render_template('index.html')
@@ -50,14 +50,13 @@ def web_tts():
 def remove_file_after_play():
   file_val = request.get_data()
   
-  print({"file_value":file_val})
   try:
     os.remove(file_val)
     print("file removed")
   except Exception as e:
     print(e)
 
-  return render_template('index.html')
+  return redirect('/')
   
 
 
@@ -65,12 +64,24 @@ def remove_file_after_play():
 
 @app.route('/static/<audio_file_name>', methods = ['GET'])
 def returnAudioFile(audio_file_name):
+
+  # @after_this_request
+  # def rem_file(response):
+  #     print(audio_file_name)
+  #     try:
+  #       # os.remove(f'./static/{audio_file_name}')
+  #       print()
+  #       print("file deleted")
+  #     except Exception as e:
+  #       print(e)
+  #     return response
+
   path_to_audio_file = "./static/" + audio_file_name
-  
-  # acc_time = os.stat(path_to_audio_file).st_atime
-  
-  # print(acc_time)
-  return send_file(path_to_audio_file,mimetype="audio/mp3",as_attachment=True,download_name=audio_file_name)
+
+  return send_file(path_to_audio_file,
+                    mimetype="audio/mp3",
+                    as_attachment=True,
+                    download_name=audio_file_name)
   
 
 

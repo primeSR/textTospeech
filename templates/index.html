@@ -49,7 +49,7 @@
             <div class="text-center" style="padding: 3px;">
               <a class="btn btn-info" href="{{file}}" type="button">Download</a>
             </div>
-            <p id="file"></p>
+            <h5 id="file" class="text-danger"></h5>
             <script>
               function removeFunc(){
                 var myFile = '{{file}}';
@@ -64,11 +64,12 @@
                 });
               }
             </script>
-            
+            {% if file %}
             <div class="text-center" style="padding: 3px;">
               YOUR audio file is here 
               <a href="#" title="audio file path" target="_blank"><strong>{{request.base_url+file}}</strong></a>
             </div>
+            {% endif %}
           </div>
         </div>
       </div>
