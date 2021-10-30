@@ -15,13 +15,13 @@ port = int(os.environ.get("PORT",5000))
 def web_tts():
   if request.method == "POST":
     lines = request.form.get('tts-text')
-    text_to_speech = gTTS(lines)
+    text_to_speech = gTTS(lines, lang='en', tld='co.uk')
 
     base_name = 'aud'
     suffix = datetime.datetime.now().strftime('%y%m%d_%H%M%S')
     file_name = "_".join([base_name,suffix])
 
-    text_to_speech.save(f'static/{file_name}.mp3', tld = 'co.uk')
+    text_to_speech.save(f'static/{file_name}.mp3')
     audio_file = f'static/{file_name}.mp3'
     text = f"audio file {file_name}.mp3 generated"
 
@@ -34,7 +34,7 @@ def web_tts():
     if lines is None:
       pass
     else:
-      tts = gTTS(lines)
+      tts = gTTS(lines,lang='en', tld='co.uk')
       base_name = 'aud'
       suffix = datetime.datetime.now().strftime('%y%m%d_%H%M%S')
       file_name = "_".join([base_name, suffix])
