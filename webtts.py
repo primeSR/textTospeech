@@ -1,5 +1,5 @@
 from flask import Flask, render_template, redirect
-from flask import request, send_file, after_this_request
+from flask import request, send_file
 
 from gtts import gTTS
 import os
@@ -65,17 +65,6 @@ def remove_file_after_play():
 @app.route('/static/<audio_file_name>', methods = ['GET'])
 def returnAudioFile(audio_file_name):
 
-  # @after_this_request
-  # def rem_file(response):
-  #     print(audio_file_name)
-  #     try:
-  #       # os.remove(f'./static/{audio_file_name}')
-  #       print()
-  #       print("file deleted")
-  #     except Exception as e:
-  #       print(e)
-  #     return response
-
   path_to_audio_file = "./static/" + audio_file_name
 
   return send_file(path_to_audio_file,
@@ -89,6 +78,5 @@ def returnAudioFile(audio_file_name):
 
 
 if __name__ == '__main__':
-  # app.run(debug=True)
   app.run(debug=True,host = '0.0.0.0',port = port)
 
