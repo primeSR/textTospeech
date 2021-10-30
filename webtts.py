@@ -15,7 +15,7 @@ port = int(os.environ.get("PORT",5000))
 def web_tts():
   if request.method == "POST":
     lines = request.form.get('tts-text')
-    text_to_speech = gTTS(lines, lang='en', tld='com')
+    text_to_speech = gTTS(lines, lang='en', tld='co.uk')
 
     base_name = 'aud'
     suffix = datetime.datetime.now().strftime('%y%m%d_%H%M%S')
