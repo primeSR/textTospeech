@@ -46,7 +46,7 @@ def web_tts():
 
   return render_template('index.html')
 
-@app.route('/file_val',methods = ['GET'])
+@app.route('/file_val',methods = ['POST'])
 def remove_file_after_play():
   file_val = request.get_data()
   

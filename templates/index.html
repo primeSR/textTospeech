@@ -52,12 +52,15 @@
             <p id="file">{{file}}</p>
             <script>
               function removeFunc(){
-                var myFile = "{{file}}";
+                var myFile = '{{file}}';
                 alert(myFile)
                 $.ajax({
-                  type:"POST",
+                  method:"POST",
                   url:"/file_val",
-                  data:myFile
+                  data:myFile,
+                  success: function(response){
+                    $('#file').text("file deleted from server")
+                  }
                 });
               }
             </script>
