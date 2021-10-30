@@ -49,11 +49,11 @@
             <div class="text-center" style="padding: 3px;">
               <a class="btn btn-info" href="{{file}}" type="button">Download</a>
             </div>
-            <p id="file">{{file}}</p>
+            <p id="file"></p>
             <script>
               function removeFunc(){
                 var myFile = '{{file}}';
-                alert(myFile)
+                alert("the audio file generated at server will be deleted now, \n Press OK")
                 $.ajax({
                   method:"POST",
                   url:"/file_val",
